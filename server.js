@@ -127,6 +127,11 @@ app.post('/api/send-mail', async (req, res) => {
   }
 });
 
+// ✅ Fix: Default root route (so "Cannot GET /" doesn't appear)
+app.get('/', (req, res) => {
+  res.send('🎉 Cheapest Trip Backend is running successfully on Render!');
+});
+
 // Final port listener
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
