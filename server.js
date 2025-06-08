@@ -15,13 +15,18 @@ app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // MySQL connection
+
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  port: process.env.DB_PORT || 3306
+  port: process.env.DB_PORT || 3306,
+  ssl: {
+    rejectUnauthorized: true  // This enables SSL verification
+  }
 });
+
 
 // Ensure uploads directory exists
 if (!fs.existsSync(path.join(__dirname, 'uploads'))) {
